@@ -77,7 +77,9 @@ ssh-keygen -q -N "" -t ed25519 -f $BUILD_DIR/.ssh/ssh_host_ed25519_key
 cat <<EOF >$BUILD_DIR/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyo7hDBskGJOzqntc5URCv365S8OOP6WhVGwhxIRBBhZuEHlyUG6I2P/QVgVZ2i3puOMsfIIgiTQHdXeB7WFM5bnT367ETub3UgIlFfahQCBaljsg3u4m/+/qg9/hXSzOIAEN7Dk33dyANCGQFkLgdEattQCxiSKOsS9Yj475/dIVLEJG5T3bY15HmhBZBFJmgBeWtMfJjBqJ5r7f5M1IUrPAhG6/uX2gCVWWNHDGRH9GpAswuvi2mW8Do6TAj1Z4G0cP652yKDwyqDh/qY9TBspTT1UsbvhJemf3aRetC+WEOYkGpp6eI2IT3Ref91RJZaIICSPTB/Xjh2GmLGBaP
 EOF
-
+echo "UsePrivilegeSeparation no" >> $BUILD_DIR/.apt/etc/ssh/ssh_config
+echo "PasswordAuthentication no" >> $BUILD_DIR/.apt/etc/ssh/ssh_config
+cat $BUILD_DIR/.apt/etc/ssh/ssh_config
 
 export PATH="$HOME/.apt/bin:$HOME/.apt/sbin:$HOME/.apt/usr/bin:$HOME/.apt/usr/sbin:$PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LD_LIBRARY_PATH"
