@@ -5,7 +5,7 @@
 set -e
 
 # debug
-# set -x
+set -x
 
 # parse and derive params
 BUILD_DIR=$1
@@ -85,3 +85,6 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 topic "Rewrite package-config files"
 find $BUILD_DIR/.apt -type f -ipath '*/pkgconfig/*.pc' | xargs --no-run-if-empty -n 1 sed -i -e 's!^prefix=\(.*\)$!prefix='"$BUILD_DIR"'/.apt\1!g'
+
+ssh-keygen -q -N "" -t rsa -f $HOME/.ssh/ssh_host_rsa_key
+ssh-keygen -q -N "" -t ed25519 -f $HOME/.ssh/ssh_host_ed25519_key
