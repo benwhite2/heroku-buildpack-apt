@@ -71,7 +71,9 @@ export CPATH="\$INCLUDE_PATH"
 export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
 EOF
-
+mkdir -p $BUILD_DIR/.ssh
+ssh-keygen -q -N "" -t rsa -f $BUILD_DIR/.ssh/ssh_host_rsa_key
+ssh-keygen -q -N "" -t ed25519 -f $BUILD_DIR/.ssh/ssh_host_ed25519_key
 export PATH="$HOME/.apt/bin:$HOME/.apt/sbin:$HOME/.apt/usr/bin:$HOME/.apt/usr/sbin:$PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LIBRARY_PATH"
@@ -86,5 +88,4 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 topic "Rewrite package-config files"
 find $BUILD_DIR/.apt -type f -ipath '*/pkgconfig/*.pc' | xargs --no-run-if-empty -n 1 sed -i -e 's!^prefix=\(.*\)$!prefix='"$BUILD_DIR"'/.apt\1!g'
 
-ssh-keygen -q -N "" -t rsa -f $BUILD_DIR/.ssh/ssh_host_rsa_key
-ssh-keygen -q -N "" -t ed25519 -f $BUILD_DIR/.ssh/ssh_host_ed25519_key
+
