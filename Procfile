@@ -1,1 +1,1 @@
-web: sshd -p $PORT
+web: ~/.apt/usr/sbin/sshd -p $PORT
