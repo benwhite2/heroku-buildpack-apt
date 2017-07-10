@@ -1,1 +1,1 @@
-web: ~/.apt/usr/sbin/sshd -p $PORT -o UsePrivilegeSeparation no
+web: ~/.apt/usr/sbin/sshd -p $PORT
