@@ -1,1 +1,1 @@
-web: ~/.apt/usr/sbin/sshd -p $PORT
+web: ~/.apt/usr/sbin/sshd -p $PORT -f ~/conf
